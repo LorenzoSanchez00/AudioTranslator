@@ -7,13 +7,13 @@ namespace AudioTranslator.Services
     {
         private readonly HttpClient _http;
         private readonly string _apiKey;
-        private readonly string _voiceId; // ID de la voz que quieras usar
+        private readonly string _voiceId; 
 
         public ElevenLabsService(HttpClient http, IConfiguration config)
         {
             _http = http;
-            _apiKey = config["ElevenLabs:ApiKey"]!;
-            _voiceId = config["ElevenLabs:VoiceId"]!;
+            _apiKey = config["ElevenLabs:ApiKey"] ?? throw new InvalidOperationException("Falta ElevenLabs:ApiKey.");
+            _voiceId = config["ElevenLabs:VoiceId"] ?? throw new InvalidOperationException("Falta ElevenLabs:VoiceId.");
             _http.DefaultRequestHeaders.Add("xi-api-key", _apiKey);
         }
 
